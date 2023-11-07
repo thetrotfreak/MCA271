@@ -1,14 +1,15 @@
+#include "misc.h"
 #include <stdio.h>
 
 void
-hr (char c, unsigned int length, int newline)
+hr (char c, unsigned int length)
 {
   for (unsigned int i = 0; i < length; i++)
     {
+      if (i == 0)
+        printf ("\n");
       printf ("%c", c);
-    }
-  if (newline > 0)
-    {
-      printf ("\n");
+      if(i==length-1)
+        printf ("\n");
     }
 }
