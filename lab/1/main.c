@@ -6,41 +6,25 @@
 
 #define STR_WIDTH 64
 
-static void
-fill (const char *fillFrom, const char *fillTo)
-{
-  // remove the nasty \n
-  if (fillTo == NULL)
-    {
-      fillTo = fillFrom;
-    }
-  int idx_newline = (int)strcspn (fillFrom, "\r\n");
-  fillTo = strndup (fillFrom, idx_newline);
-}
-
 void
 scanNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
 {
   for (unsigned int i = 0; i < warehouses; i++)
     {
       network[i] = (Network *)calloc (outlets, sizeof (Network));
+      network[i]->from.name = (char *)calloc (STR_WIDTH, sizeof (char));
       printf ("\nWarehouse? ");
-      fgets (network[i]->from.name, STR_WIDTH, stdin);
-      fill (network[i]->from.name, NULL);
+      readStr (network[i]->from.name, STR_WIDTH);
       // printf ("Supply? ");
       for (unsigned int j = 0; j < outlets; j++)
         {
           printf ("Outlet? ");
-          fgets(network
-          fgets (*((network + i) + j).to.name, STR_WIDTH, stdin);
-          // fgets (*((network + i) + j)->to->name, STR_WIDTH, stdin);
-          // fill (*((network + i) + j)->from, NULL);
-          // printf ("Demand? ");
-          // printf ("Cost? ");
-          // printf ("Mode? ");
+          readStr (network[i]->to.name, STR_WIDTH);
+          //  printf ("Demand? ");
+          //  printf ("Cost? ");
+          //  printf ("Mode? ");
           printf ("Distance? ");
-          scanf ("%u", &(*(network + i) + j)->distance);
-          printf ("%u", (*(network + i) + j)->distance);
+          readUInt (&network[i]->distance, STR_WIDTH);
         }
     }
 }
@@ -50,10 +34,15 @@ freeNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
 {
   for (unsigned int i = 0; i < warehouses; i++)
     {
-      free (*(network + i));
+      for (unsigned int j = 0; j < outlets; j++)
+        {
+          free (network[i]->from.name);
+          free (network[i]->to.name);
+          free (network[i]);
+        }
     }
-    free (network);
-    network = NULL;
+  free (network);
+  network = NULL;
 }
 
 void
@@ -61,6 +50,7 @@ menu (Network **s, unsigned int r, unsigned int c)
 {
   int sentinel = 1;
   int choice = 0;
+  char buffer[128];
   while (sentinel)
     {
       hr ('-', 32);
@@ -76,7 +66,11 @@ menu (Network **s, unsigned int r, unsigned int c)
       printf ("\n7. Find route by cost");
       hr ('-', 32);
 
-      scanf ("%d", &choice);
+      // scanf (" %d", &choice);
+      //      fgets (buffer, sizeof (buffer), stdin);
+      //      choice = strtol (buffer, NULL, 10);
+      readInt (&choice, 128);
+
       switch (choice)
         {
         case 1:
@@ -113,12 +107,18 @@ int main(){
 
   unsigned int warehouses = 0;
   unsigned int outlets = 0;
+  // char buffer[128];
 
   printf ("\nNumber of Warehouse? ");
-  scanf ("%u", &warehouses);
+  readUInt (&warehouses, 128);
+  // fgets (buffer, sizeof (buffer), stdin);
+  // warehouses = strtol (buffer, NULL, 10);
 
   printf ("\nNumber of Outlet? ");
-  scanf ("%u", &outlets);
+  readUInt (&outlets, 128);
+  // scanf ("%u", &outlets);
+  // fgets (buffer, sizeof (buffer), stdin);
+  // warehouses = strtol (buffer, NULL, 10);
 
   Network **netw = (Network **)calloc (warehouses, sizeof (Network *));
 
