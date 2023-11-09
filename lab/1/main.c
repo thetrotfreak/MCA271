@@ -12,19 +12,38 @@ scanNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
   for (unsigned int i = 0; i < warehouses; i++)
     {
       network[i] = (Network *)calloc (outlets, sizeof (Network));
-      network[i]->from.name = (char *)calloc (STR_WIDTH, sizeof (char));
-      printf ("\nWarehouse? ");
-      readStr (network[i]->from.name, STR_WIDTH);
-      // printf ("Supply? ");
       for (unsigned int j = 0; j < outlets; j++)
         {
-          printf ("Outlet? ");
-          readStr (network[i]->to.name, STR_WIDTH);
-          //  printf ("Demand? ");
-          //  printf ("Cost? ");
-          //  printf ("Mode? ");
-          printf ("Distance? ");
-          readUInt (&network[i]->distance, STR_WIDTH);
+          network[i][j].from.name = (char *)calloc (STR_WIDTH, sizeof (char));
+          network[i][j].to.name = (char *)calloc (STR_WIDTH, sizeof (char));
+          if (j == 0)
+            {
+              /*
+               * read warehouse once per row
+               * we'll copy the warehouse to the subsequent columns
+               */
+              printf ("\nWarehouse #%u? ", i);
+              readStr (network[i][j].from.name, STR_WIDTH);
+              // printf ("Supply? ");
+            }
+          else
+            {
+              strcpy (network[i][j].from.name, network[i][j - 1].from.name);
+              if (i == 0)
+                {
+                  printf ("Outlet #%u? ", j);
+                  readStr (network[i][j].to.name, STR_WIDTH);
+                }
+              else
+                {
+                  strcpy (network[i][j].to.name, network[i - 1][j].to.name);
+                }
+              // printf ("Demand? ");
+              // printf ("Cost? ");
+              // printf ("Mode? ");
+              printf ("Distance? ");
+              readUInt (&network[i][j].distance, STR_WIDTH);
+            }
         }
     }
 }
@@ -36,13 +55,12 @@ freeNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
     {
       for (unsigned int j = 0; j < outlets; j++)
         {
-          free (network[i]->from.name);
-          free (network[i]->to.name);
-          free (network[i]);
+          free (network[i][j].from.name);
+          free (network[i][j].to.name);
         }
+      free (network[i]);
     }
   free (network);
-  network = NULL;
 }
 
 void
@@ -50,7 +68,7 @@ menu (Network **s, unsigned int r, unsigned int c)
 {
   int sentinel = 1;
   int choice = 0;
-  char buffer[128];
+  char buffer[STR_WIDTH];
   while (sentinel)
     {
       hr ('-', 32);
@@ -66,10 +84,7 @@ menu (Network **s, unsigned int r, unsigned int c)
       printf ("\n7. Find route by cost");
       hr ('-', 32);
 
-      // scanf (" %d", &choice);
-      //      fgets (buffer, sizeof (buffer), stdin);
-      //      choice = strtol (buffer, NULL, 10);
-      readInt (&choice, 128);
+      readInt (&choice, STR_WIDTH);
 
       switch (choice)
         {
@@ -95,7 +110,9 @@ menu (Network **s, unsigned int r, unsigned int c)
     }
 }
 
-int main(){
+int
+main ()
+{
   /* Network n = {
    *   .from = "Jadugoda",
    *   .to = "Bangalore",
@@ -107,20 +124,18 @@ int main(){
 
   unsigned int warehouses = 0;
   unsigned int outlets = 0;
-  // char buffer[128];
 
   printf ("\nNumber of Warehouse? ");
   readUInt (&warehouses, 128);
-  // fgets (buffer, sizeof (buffer), stdin);
-  // warehouses = strtol (buffer, NULL, 10);
 
   printf ("\nNumber of Outlet? ");
   readUInt (&outlets, 128);
-  // scanf ("%u", &outlets);
-  // fgets (buffer, sizeof (buffer), stdin);
-  // warehouses = strtol (buffer, NULL, 10);
 
   Network **netw = (Network **)calloc (warehouses, sizeof (Network *));
+  // rest of the dynamic memory allocation
+  // is taken care of in
+  // scanNetwork
+  // this is to save loop iterations
 
   menu (netw, warehouses, outlets);
 

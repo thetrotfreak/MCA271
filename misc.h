@@ -1,8 +1,8 @@
 #ifndef MISC_H
 #define MISC_H
 
-void flush ();
-/*
+/* void flush ();
+ *
  * Read
  * https://faq.cprogramming.com/cgi-bin/smartfaq.cgi?answer=1044873249&id=1043284392
  */

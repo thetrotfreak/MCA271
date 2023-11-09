@@ -36,7 +36,7 @@ readStr (char *p, int buffer_size)
 {
   if (fgets (p, buffer_size, stdin) == NULL)
     {
-      perror ("fgets");
+      // perror ("fgets");
       return;
     }
   fill (p, NULL);
@@ -50,34 +50,32 @@ readInt (int *p, int buffer_size)
   char *endptr;
   long val;
 
-  if (buffer_size <= 0) {
-    buffer_size = 64;
-  }
+  if (buffer_size <= 0)
+    {
+      buffer_size = 64;
+    }
 
   char buffer[buffer_size];
 
-  if (fgets(buffer, buffer_size, stdin) == NULL) {
-    perror("fgets");
-    return;
-  }
-
-  // Remove the newline character from the end of the input
-  // size_t len = strlen(buffer);
-  // if (len > 0 && buffer[len - 1] == '\n') {
-  //  buffer[len - 1] = '\0';
-  //}
+  if (fgets (buffer, buffer_size, stdin) == NULL)
+    {
+      // perror("fgets");
+      return;
+    }
 
   errno = 0; // To distinguish success/failure after call
-  val = strtol(buffer, &endptr, base);
+  val = strtol (buffer, &endptr, base);
 
   // Check for various possible errors.
-  if (errno != 0) {
-    perror("strtol");
-    return;
-  }
+  if (errno != 0)
+    {
+      // perror("strtol");
+      return;
+    }
 
   // If we got here, strtol() successfully parsed a number.
-  *p = (int)val; // Store the result in the memory location pointed to by p
+  // Store the result in the memory location pointed to by p
+  *p = (int)val;
 }
 
 void
@@ -88,32 +86,30 @@ readUInt (unsigned int *p, int buffer_size)
   char *endptr;
   long val;
 
-  if (buffer_size <= 0) {
-    buffer_size = 64;
-  }
+  if (buffer_size <= 0)
+    {
+      buffer_size = 64;
+    }
 
   char buffer[buffer_size];
 
-  if (fgets(buffer, buffer_size, stdin) == NULL) {
-    perror("fgets");
-    return;
-  }
-
-  // Remove the newline character from the end of the input
-  // size_t len = strlen(buffer);
-  // if (len > 0 && buffer[len - 1] == '\n') {
-  //  buffer[len - 1] = '\0';
-  //}
+  if (fgets (buffer, buffer_size, stdin) == NULL)
+    {
+      // perror("fgets");
+      return;
+    }
 
   errno = 0; // To distinguish success/failure after call
-  val = strtol(buffer, &endptr, base);
+  val = strtol (buffer, &endptr, base);
 
   // Check for various possible errors.
-  if (errno != 0) {
-    perror("strtol");
-    return;
-  }
+  if (errno != 0)
+    {
+      // perror("strtol");
+      return;
+    }
 
   // If we got here, strtol() successfully parsed a number.
-  *p = (unsigned int)val; // Store the result in the memory location pointed to by p
+  // Store the result in the memory location pointed to by p
+  *p = (unsigned int)val;
 }
