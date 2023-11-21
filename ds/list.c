@@ -1,10 +1,6 @@
 #include "list.h"
 #include <stdio.h>
-
-extern List *head = NULL;
-extern List *tail = NULL;
-
-extern unsigned int length = 0;
+#include <stdlib.h>
 
 static List *
 _new_node ()
@@ -13,25 +9,30 @@ _new_node ()
   return node;
 }
 
-void list_new()
+List *
+list_new ()
 {
-    if(head != NULL){
-        return;
-      }
-    return _node_new ();
+  static List *head;
+  if (head != NULL)
+    {
+      return NULL;
+    }
+  return _new_node ();
 }
 
 void
-list_del ()
+list_free (List *head)
 {
-    if(head == NULL){
-        return;
-      }
+  if (head == NULL)
+    {
+      return;
+    }
 
-    do{
-        List *temp = head;
-        head = head->next;
-        free (temp);
-      }
-    while (head->next != NULL);
+  do
+    {
+      List *temp = head;
+      head = head->next;
+      free (temp);
+    }
+  while (head->next != NULL);
 }

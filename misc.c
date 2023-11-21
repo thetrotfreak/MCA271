@@ -46,7 +46,6 @@ void
 readInt (int *p, int buffer_size)
 {
   const int base = 10;
-  char *str;
   char *endptr;
   long val;
 
@@ -82,7 +81,6 @@ void
 readUInt (unsigned int *p, int buffer_size)
 {
   const int base = 10;
-  char *str;
   char *endptr;
   long val;
 

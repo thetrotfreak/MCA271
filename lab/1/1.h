@@ -6,6 +6,9 @@
  * https://personal.utdallas.edu/~scniu/OPRE-6201/documents/TP1-Formulation.pdf
  */
 
+extern unsigned int w;
+extern unsigned int o;
+
 typedef enum TransportationMode
 {
   AIR,
@@ -35,13 +38,11 @@ typedef struct Network
   unsigned int distance;
 } Network;
 
-// DS operations
 void combineDistance ();
 void optimizeTransport ();
 void shortestDistance ();
 
-// Matrix operations
-void addWarehouse ();
+void addWarehouse (Network **, unsigned int, unsigned int, const char *);
 void removeWarehouse ();
 
 void addOutlet ();
@@ -52,13 +53,13 @@ void removeOutlet ();
  *
  *     | O1 | O2 | ... | On |
  * ----|----|----|-----|----|
- *  W1 |
+ *  W1 |    |    |     |    |
  * ----|----|----|-----|----|
- *  W2 |
+ *  W2 |    |    |     |    |
  * ----|----|----|-----|----|
- *  ...|
+ *  ...|    |    |     |    |
  * ----|----|----|-----|----|
- *  Wn |
+ *  Wn |    |    |     |    |
  * ----|----|----|-----|----|
  *
  */

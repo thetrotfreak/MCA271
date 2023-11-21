@@ -6,13 +6,18 @@
 
 #define STR_WIDTH 64
 
+unsigned int w;
+unsigned int o;
+
 void
-scanNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
+scanNetwork (Network **network)
+// scanNetwork (Network **network, unsigned int warehouses, unsigned int
+// outlets)
 {
-  for (unsigned int i = 0; i < warehouses; i++)
+  for (unsigned int i = 0; i < w; i++)
     {
-      network[i] = (Network *)calloc (outlets, sizeof (Network));
-      for (unsigned int j = 0; j < outlets; j++)
+      network[i] = (Network *)calloc (o, sizeof (Network));
+      for (unsigned int j = 0; j < o; j++)
         {
           network[i][j].from.name = (char *)calloc (STR_WIDTH, sizeof (char));
           network[i][j].to.name = (char *)calloc (STR_WIDTH, sizeof (char));
@@ -49,11 +54,11 @@ scanNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
 }
 
 void
-freeNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
+freeNetwork (Network **network)
 {
-  for (unsigned int i = 0; i < warehouses; i++)
+  for (unsigned int i = 0; i < w; i++)
     {
-      for (unsigned int j = 0; j < outlets; j++)
+      for (unsigned int j = 0; j < o; j++)
         {
           free (network[i][j].from.name);
           free (network[i][j].to.name);
@@ -64,12 +69,11 @@ freeNetwork (Network **network, unsigned int warehouses, unsigned int outlets)
 }
 
 void
-menu (Network **s, unsigned int r, unsigned int c)
+menu (Network **s)
 {
-  int sentinel = 1;
+  int sentinel = 0;
   int choice = 0;
-  char buffer[STR_WIDTH];
-  while (sentinel)
+  while (sentinel == 0)
     {
       hr ('-', 32);
       printf ("1. Enter Network");
@@ -89,9 +93,11 @@ menu (Network **s, unsigned int r, unsigned int c)
       switch (choice)
         {
         case 1:
-          scanNetwork (s, r, c);
+          scanNetwork (s);
           break;
         case 2:
+          // addWarehouse (s, r, c, "Wn");
+          // printf ("%s", s[r][0].from.name);
           break;
         case 3:
           break;
@@ -104,8 +110,8 @@ menu (Network **s, unsigned int r, unsigned int c)
         case 7:
           break;
         default:
-          freeNetwork (s, r, c);
-          sentinel = 0;
+          freeNetwork (s);
+          sentinel = 1;
         }
     }
 }
@@ -122,22 +128,29 @@ main ()
    * };
    */
 
-  unsigned int warehouses = 0;
-  unsigned int outlets = 0;
+  // unsigned int warehouses = 0;
+  // unsigned int outlets = 0;
 
   printf ("\nNumber of Warehouse? ");
-  readUInt (&warehouses, 128);
+  readUInt (&w, 128);
 
   printf ("\nNumber of Outlet? ");
-  readUInt (&outlets, 128);
+  readUInt (&o, 128);
 
-  Network **netw = (Network **)calloc (warehouses, sizeof (Network *));
+  Network **netw = (Network **)calloc (w, sizeof (Network *));
+  if (netw == NULL)
+    {
+        printf("ENOMEM");
+    }
   // rest of the dynamic memory allocation
   // is taken care of in
   // scanNetwork
   // this is to save loop iterations
 
-  menu (netw, warehouses, outlets);
+  else
+    {
+        menu (netw);
+    }
 
   return 0;
 }
