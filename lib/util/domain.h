@@ -36,4 +36,6 @@ typedef struct NetworkNode
   struct NetworkNode *next;
 } NetworkNode;
 
+void printNetwork (Network);
+
 #endif // DOMAIN_H

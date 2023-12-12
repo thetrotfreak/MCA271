@@ -43,6 +43,5 @@ void insertAfter_v2 (SLL *, Network, unsigned int);
 void insertBefore_v2 (SLL *, Network, unsigned int);
 void delete_v2 (SLL *);
 void printList (SLL *);
-void printNetwork (Network);
 
 #endif // _SLL_H
