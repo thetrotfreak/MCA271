@@ -2,7 +2,7 @@ CC = gcc
 
 CFLAGS = -g3 -Wall -Wpedantic
 
-ROOT = $(HOME)/dev/mca/2/dsa
+ROOT = $(HOME)/dev/mca/2/dsa/lib
 
 TARGET = 1
 
@@ -24,6 +24,6 @@ clean:
 	$(RM) *.o
 	$(RM) *.out
 	$(RM) *.gch
-	fd . --max-depth=1 --type=executable --exec="$(RM)"
+	fd . --max-depth=1 --type=executable --exec=rm
 
 .PHONY: all clean

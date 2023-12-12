@@ -42,7 +42,7 @@ void combineDistance ();
 void optimizeTransport ();
 void shortestDistance ();
 
-void addWarehouse (Network **, unsigned int, unsigned int, const char *);
+void addWarehouse (Network **, const char *);
 void removeWarehouse ();
 
 void addOutlet ();

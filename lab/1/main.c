@@ -11,8 +11,6 @@ unsigned int o;
 
 void
 scanNetwork (Network **network)
-// scanNetwork (Network **network, unsigned int warehouses, unsigned int
-// outlets)
 {
   for (unsigned int i = 0; i < w; i++)
     {
@@ -96,8 +94,7 @@ menu (Network **s)
           scanNetwork (s);
           break;
         case 2:
-          // addWarehouse (s, r, c, "Wn");
-          // printf ("%s", s[r][0].from.name);
+          addWarehouse (s, "Wn");
           break;
         case 3:
           break;
@@ -140,7 +137,7 @@ main ()
   Network **netw = (Network **)calloc (w, sizeof (Network *));
   if (netw == NULL)
     {
-        printf("ENOMEM");
+      printf ("ENOMEM");
     }
   // rest of the dynamic memory allocation
   // is taken care of in
@@ -149,7 +146,7 @@ main ()
 
   else
     {
-        menu (netw);
+      menu (netw);
     }
 
   return 0;

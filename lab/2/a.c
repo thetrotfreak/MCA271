@@ -17,10 +17,15 @@ main ()
   // free the memory
   freeList (&list);
 
-  DLL l;
-  newList_v2 (&l);
-  prepend_v2 (&l, (Network){ (Warehouse){ "W1", 100 }, (Outlet){ "O1", 50 },
+  DLL l1;
+  DLL l2;
+  newList_v2 (&l1);
+  newList_v2 (&l2);
+  prepend_v2 (&l1, (Network){ (Warehouse){ "W1", 100 }, (Outlet){ "O1", 50 },
                              ROAD, 200, 30 });
-  freeList_v2 (&l);
+  prepend_v2 (&l2, (Network){ (Warehouse){ "W2", 100 }, (Outlet){ "O2", 50 },
+                              ROAD, 200, 30 });
+  freeList_v2 (&l1);
+  freeList_v2 (&l2);
   return 0;
 }
