@@ -23,9 +23,9 @@ static DoubleNetworkNode *createNode (Network);
 /* Read:
  * https://stackoverflow.com/questions/32715339/does-passing-pointer-to-structure-to-a-function-create-local-copies-of-it-in-c
  */
-void freeList (DoubleNetworkNode **);
-void freeNode (DoubleNetworkNode **, unsigned int);
-void appendNode (DoubleNetworkNode **, Network);
+// void freeList (DoubleNetworkNode **);
+// void freeNode (DoubleNetworkNode **, unsigned int);
+// void appendNode (DoubleNetworkNode **, Network);
 
 /* v2 methods for this list
  * we'll wrap list relevant metadata

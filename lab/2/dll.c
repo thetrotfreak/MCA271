@@ -24,40 +24,40 @@ createNode (Network network)
   return newNode;
 }
 
-void
-appendNode (DoubleNetworkNode **head, Network network)
-{
-  DoubleNetworkNode *newNode = createNode (network);
-  if (*head == NULL)
-    {
-      *head = newNode;
-      newNode->prev = NULL;
-    }
-  else
-    {
-      DoubleNetworkNode *current = *head;
-      while (current->next != NULL)
-        {
-          current = current->next;
-        }
-      current->next = newNode;
-      newNode->prev = current;
-    }
-}
+// void
+// appendNode (DoubleNetworkNode **head, Network network)
+// {
+//   DoubleNetworkNode *newNode = createNode (network);
+//   if (*head == NULL)
+//     {
+//       *head = newNode;
+//       newNode->prev = NULL;
+//     }
+//   else
+//     {
+//       DoubleNetworkNode *current = *head;
+//       while (current->next != NULL)
+//         {
+//           current = current->next;
+//         }
+//       current->next = newNode;
+//       newNode->prev = current;
+//     }
+// }
 
-void
-freeList (DoubleNetworkNode **head)
-{
-  DoubleNetworkNode *current = *head;
-  DoubleNetworkNode *next;
-  while (current != NULL)
-    {
-      next = current->next;
-      free (current);
-      current = next;
-    }
-  *head = NULL;
-}
+// void
+// freeList (DoubleNetworkNode **head)
+// {
+//   DoubleNetworkNode *current = *head;
+//   DoubleNetworkNode *next;
+//   while (current != NULL)
+//     {
+//       next = current->next;
+//       free (current);
+//       current = next;
+//     }
+//   *head = NULL;
+// }
 
 void
 newList_v2 (DLL *dll)
