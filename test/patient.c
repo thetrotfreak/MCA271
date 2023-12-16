@@ -32,8 +32,8 @@ void enqueue(Patient *a, Patient p){
 		if(validPatient(&p)){
 			a[++rear] = p;
 		}
+	qsort(&a[0], rear+1, sizeof(Patient), cmp);
 	}
-	qsort(&p, rear+1, sizeof(Patient), cmp);
 }
 
 void traverse(Patient *a){
