@@ -10,9 +10,9 @@ int rear = -1;
 int
 main (int argc, char *argv[])
 {
-  Patient p1 = { .id = 1, .age = 12, .severity = 1 };
-  Patient p2 = { .id = 2, .age = 22, .severity = 3 };
-  Patient p3 = { .id = 3, .age = 33, .severity = 2 };
+  Patient p1 = { .id = 1, .age = 12, .severity = 5 };
+  Patient p2 = { .id = 2, .age = 22, .severity = L3 };
+  Patient p3 = { .id = 3, .age = 33, .severity = L4 };
   Patient p[SIZE];
 
   enqueue (&p[0], p1);

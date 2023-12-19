@@ -19,7 +19,7 @@ printPatient (Patient *p)
 int
 validPatient (Patient *p)
 {
-  if (p->severity > 0 && p->severity < 6)
+  if (p->severity >= L1 && p->severity <= L5)
     {
       return 1;
     }
@@ -29,9 +29,14 @@ validPatient (Patient *p)
       return 0;
     }
 }
+
 void
 enqueue (Patient *a, Patient p)
 {
+  if (rear == (SIZE - 1))
+    {
+      fprintf (stderr, "OVERFLOW\n");
+    }
   if (front == -1 & rear == -1)
     {
       if (validPatient (&p))
@@ -83,12 +88,18 @@ printSevere (Patient *a)
       printf ("\n===========================================\n");
       printf ("                   Severe                      ");
       printf ("\n===========================================\n");
+      int severe = 0;
       for (int i = front; i <= rear; i++)
         {
           if (a[i].severity == 1)
             {
               printPatient (&a[i]);
+              severe++;
             }
+        }
+      if (severe==0)
+        {
+          printf ("(None)\n");
         }
     }
 }

@@ -5,18 +5,18 @@
 
 typedef enum t_Severity_Level_of_Illness
 {
-  L1, // 0
-  L2, // 1
-  L3, // 2
-  L4, // 3
-  L5  // 4
+  L1 = 1,
+  L2 = 2,
+  L3 = 3,
+  L4 = 4,
+  L5 = 5
 } Severity;
 
 typedef struct t_Patient
 {
   unsigned int id;
   unsigned short age;
-  int severity;
+  Severity severity;
 } Patient;
 
 extern int front;
