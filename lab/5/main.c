@@ -44,7 +44,7 @@ main (int argc, char **argv)
     }
   else
     {
-       printf ("!Ok\n");
+      printf ("!Ok\n");
     }
 
   char *name = "Mumbai";
@@ -52,11 +52,11 @@ main (int argc, char **argv)
                       (const char *)name)
       != -1)
     {
-       printf ("Ok\n");
+      printf ("Ok\n");
     }
   else
     {
-       printf ("!Ok\n");
+      printf ("!Ok\n");
     }
   return 0;
 }
