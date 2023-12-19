@@ -1,0 +1,7 @@
+Implementation of Linear and Binary Search
+
+Include the following:
+1. Implement linear, sentinel and binary search. 
+2. Search for any two data types.
+3. Implement bubble and insertion sort before using binary search. Compute the total number of comparisons, data transfer operations for each sort.
+4. Calculate the element comparisons, index comparisons for each search.
