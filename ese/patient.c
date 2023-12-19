@@ -87,7 +87,7 @@ printSevere (Patient *a)
         {
           if (a[i].severity == 1)
             {
-              printPatient (&a[rear]);
+              printPatient (&a[i]);
             }
         }
     }
