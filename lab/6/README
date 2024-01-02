@@ -1,0 +1,4 @@
+Implement Merge sort (or) Quick sort in your domain:
+  1. Use rand() method to generate for numerical data.
+  2. Perform Read and Write Operations in files using structures.   
+  3. Comparison of any two sorting techniques with respect to number of comparisons and data transfer operations.

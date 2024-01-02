@@ -1,0 +1,3 @@
+Bangalore, karnataka|1800
+Ghatshila, East Singhbhum, Jharkhand|2000
+Pune, Maharashtra|1200

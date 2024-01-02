@@ -1,6 +1,8 @@
 #ifndef DOMAIN_H
 #define DOMAIN_H
 
+#include <stddef.h>
+
 typedef enum TransportationMode
 {
   AIR,
@@ -36,6 +38,11 @@ typedef struct NetworkNode
   struct NetworkNode *next;
 } NetworkNode;
 
+void asOutlet (const char *string, int field, Outlet *outlets);
+Outlet *freadOutlet (const char *filepath, const char *delim);
+void fwriteOutlet (const Outlet *outlet, size_t nmemb, const char *filepath,
+                   const char *delim);
 void printNetwork (Network);
+void printOutlet (Outlet outlet);
 
 #endif // DOMAIN_H
