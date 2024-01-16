@@ -23,8 +23,11 @@ main ()
   printf ("\nLevel Order traversal: ");
   LevelOrder (root);
 
-  int inorder[] = { 9, 3, 15, 20, 7 };
-  int preorder[] = { 3, 9, 20, 15, 7 };
+  // int inorder[] = { 9, 3, 15, 20, 7 };
+  // int preorder[] = { 3, 9, 20, 15, 7 };
+
+  int inorder[] = { 20, 3, 7, 9, 15 };
+  int preorder[] = { 9, 3, 20, 7, 15 };
 
   int preindex = 0;
   int size = sizeof (preorder) / sizeof (int);
